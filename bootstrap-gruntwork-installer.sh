@@ -25,7 +25,7 @@ readonly DEFAULT_FETCH_VERSION="v0.3.2"
 readonly FETCH_DOWNLOAD_URL_BASE="https://github.com/gruntwork-io/fetch/releases/download"
 readonly FETCH_INSTALL_PATH="$BIN_DIR/fetch"
 
-readonly GRUNTWORK_INSTALLER_DOWNLOAD_URL_BASE="https://raw.githubusercontent.com/gruntwork-io/gruntwork-installer"
+readonly GRUNTWORK_INSTALLER_DOWNLOAD_URL_BASE="https://raw.githubusercontent.com/gruntwork-io/gruntwork-installer/%s/%s"
 readonly GRUNTWORK_INSTALLER_INSTALL_PATH="$BIN_DIR/gruntwork-install"
 readonly GRUNTWORK_INSTALLER_SCRIPT_NAME="gruntwork-install"
 
@@ -264,7 +264,7 @@ function bootstrap {
   assert_not_empty "--user-data-owner" "$user_data_folder_owner"
 
   if [[ -z "$download_url" ]]; then
-    download_url="${GRUNTWORK_INSTALLER_DOWNLOAD_URL_BASE}/${installer_version}/${GRUNTWORK_INSTALLER_SCRIPT_NAME}"
+    download_url=$(printf "${GRUNTWORK_INSTALLER_DOWNLOAD_URL_BASE}" "${installer_version}" "${GRUNTWORK_INSTALLER_SCRIPT_NAME}")
   fi
 
   echo "Installing $GRUNTWORK_INSTALLER_SCRIPT_NAME..."
